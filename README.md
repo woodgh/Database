@@ -45,7 +45,17 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 ```
 
+## 볼륨 초기화
+
+`MYSQL_ROOT_HOST` 등 환경변수 변경 시, 기존 볼륨을 삭제하고 재생성해야 적용된다.
+
+```bash
+docker compose down -v
+docker compose up -d
+```
+
 ## 보안
 
 - `127.0.0.1:3306`으로 바인딩되어 **외부 접속 불가**
 - `shared` 네트워크는 Docker 내부 전용으로 외부에 노출되지 않음
+- `MYSQL_ROOT_HOST: '%'`로 설정되어 있으나, 포트가 로컬 바인딩이므로 Docker 네트워크 내부에서만 접근 가능
